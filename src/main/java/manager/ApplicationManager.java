@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
 
     private WebDriver driver;
@@ -17,6 +19,7 @@ public class ApplicationManager {
     public void setUp(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
      //   var wnd = driver.manage().window();
      //   wnd.setSize(600,800);

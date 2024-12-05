@@ -3,15 +3,14 @@ package tests;
 import manager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import pages.SearchPage;
 import pages.LoginPage;
 
 public class LoginTests extends ApplicationManager {
     @Test
     public void loginPositiveTest() {
-        new HomePage(getDriver()).clickBtnLoginHeader();
+        new SearchPage(getDriver()).clickBtnLoginHeader();
         new LoginPage(getDriver()).typeLoginForm("levrivk@gmail.com", "Lo!4815162342");
 
        /* WebElement element = getDriver().findElement(By.xpath("//[@id='password']"));
