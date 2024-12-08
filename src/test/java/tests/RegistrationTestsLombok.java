@@ -2,12 +2,13 @@ package tests;
 
 import dto.UserDtoLombok;
 import manager.ApplicationManager;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.RegistrationPage;
 import pages.SearchPage;
 
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class RegistrationTestsLombok extends ApplicationManager {
@@ -31,5 +32,82 @@ public class RegistrationTestsLombok extends ApplicationManager {
         Assert.assertTrue(registrationPage.isPopUpRegistrationMessagePresent());
 
     }
+@Test
+    public void registrationNegativeTest_WrongName(){
+        UserDtoLombok user  = UserDtoLombok.builder()
+                .name("")
+                .lastName("Ivanov")
+                .email("ivanov@gmail.com")
+                .password("Ivanov123!")
+                .build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationFormlombok(user);
+        registrationPage.clickCheckBox();
+        registrationPage.clickBtnYalla();
+    Assert.assertTrue(registrationPage.isPopUpRegistrationMessageUnSuccess_Name_is_required());
+}
+    @Test
+    public void registrationNegativeTest_WrongLastName(){
+        UserDtoLombok user  = UserDtoLombok.builder()
+                .name("Vanya")
+                .lastName("")
+                .email("ivanov@gmail.com")
+                .password("Ivanov123!")
+                .build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationFormlombok(user);
+        registrationPage.clickCheckBox();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.isPopUpRegistrationMessageUnSuccess_Last_name_is_required());
 
+
+    }
+    @Test
+    public void registrationNegativeTest_WrongEmail(){
+        UserDtoLombok user  = UserDtoLombok.builder()
+                .name("Vanya")
+                .lastName("Ivanov")
+                .email("")
+                .password("Ivanov123!")
+                .build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationFormlombok(user);
+        registrationPage.clickCheckBox();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.isPopUpRegistrationMessageUnSuccess_Email_is_required());
+
+    }
+    @Test
+    public void registrationNegativeTest_WrongPassword(){
+        UserDtoLombok user  = UserDtoLombok.builder()
+                .name("Vanya")
+                .lastName("Ivanov")
+                .email("ivanov@gmail.com")
+                .password("")
+                .build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationFormlombok(user);
+        registrationPage.clickCheckBox();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.isPopUpRegistrationMessageUnSuccess_Password_is_required());
+    }
+
+    @Test
+    public void registrationNegativeTest_Unchecked_Checkbox(){
+        UserDtoLombok user  = UserDtoLombok.builder()
+                .name("Vanya")
+                .lastName("Ivanov")
+                .email("ivanov@gmail.com")
+                .password("Ivan123!")
+                .build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationFormlombok(user);
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.isYallaButtonInactive());
+    }
 }

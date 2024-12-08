@@ -30,7 +30,7 @@ public class LoginTests extends ApplicationManager {
         if (element.isDisplayed()) {
             element.sendKeys("your_password");
         } else {
-            System.out.println("Элемент недоступен или скрыт");
+            System.out.println("element is not aviable o hidden ");
         }
 
     }

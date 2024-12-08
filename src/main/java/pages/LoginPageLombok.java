@@ -24,6 +24,9 @@ public class LoginPageLombok extends BasePage {
     @FindBy(xpath = "//mat-dialog-container[@id='mat-dialog-0']")
     WebElement popUpLoginMessageSuccess;
 
+    @FindBy(xpath = "//div[@class='error']")
+    WebElement errorMessage;
+
 
     public void typeLoginFormLombok(UserDtoLombok user){
         inputEmail.sendKeys(user.getEmail());
@@ -35,8 +38,17 @@ public class LoginPageLombok extends BasePage {
     public void clickBtnYallaLogin(){
         btnYalla.click();
     }
-    public boolean isPopUpLoginMessagePresent(){
+  //  public boolean isPopUpLoginMessagePresent(){
+    //    pause(3);
+      //  return isTextInElementPresent(popUpLoginMessageSuccess,"Logged in success");
+
+    public boolean isPopUpLoginMessagePresent(String text){
         pause(3);
-        return isTextInElementPresent(popUpLoginMessageSuccess,"Logged in success");
+        return isTextInElementPresent(popUpLoginMessageSuccess,text);
+    }
+
+    public boolean validateErrorMessage(String text){
+        pause(2);
+        return isTextInElementPresent(errorMessage,text);
     }
 }
