@@ -123,4 +123,7 @@ public class RegistrationPage extends BasePage {
             return true;
         }
     }
+    public boolean btnYallaIsDisabled2(){
+        return !btnYalla.isEnabled();
+    }
 }

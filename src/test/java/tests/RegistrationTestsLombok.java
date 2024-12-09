@@ -110,4 +110,19 @@ public class RegistrationTestsLombok extends ApplicationManager {
         registrationPage.clickBtnYalla();
         Assert.assertTrue(registrationPage.isYallaButtonInactive());
     }
+
+    @Test
+    public void registrationNegativeTest_WO_Checkbox(){
+        UserDtoLombok user  = UserDtoLombok.builder()
+                .name("Vanya")
+                .lastName("Ivanov")
+                .email("ivanov@gmail.com")
+                .password("Ivan123!")
+                .build();
+        new SearchPage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationFormlombok(user);
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(registrationPage.btnYallaIsDisabled2());
+    }
 }
