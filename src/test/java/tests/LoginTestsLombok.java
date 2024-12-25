@@ -31,7 +31,6 @@ public class LoginTestsLombok extends ApplicationManager {
         loginPageLombok = new LoginPageLombok(getDriver());
         loginPageLombok.typeLoginFormLombok(user);
         loginPageLombok.clickBtnYallaLogin();
-
        Assert.assertTrue(loginPageLombok.isPopUpLoginMessagePresent("Logged in success"));
 
     }
