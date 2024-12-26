@@ -39,8 +39,9 @@ public void clickBtnSignUp(){
     public void fillSearchCarFormWOCalendar(String city, String startDate, String endDate) {
         inputCity.click();
         inputCity.sendKeys(city);
+
         Actions actions = new Actions(driver);
-        actions.moveToElement(inputCity, 0, 27).pause(2000).click().perform();
+        actions.moveToElement(inputCity, 0, 40).pause(2000).click().perform();
         //=======================================
         inputDates.click();
         inputDates.sendKeys(startDate + " - " + endDate);

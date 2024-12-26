@@ -10,7 +10,7 @@ import pages.LetCarWorkPage;
 import pages.LoginPageLombok;
 import pages.SearchPage;
 import utils.Fuel;
-//import utils.RetryAnalyzer;
+import utils.RetryAnalyzer;
 
 import java.util.Random;
 
@@ -100,6 +100,26 @@ public class AddNewCarTests extends ApplicationManager {
         letCarWorkPage = new LetCarWorkPage(getDriver());
         letCarWorkPage.typeLetCarWorkForm(car);
         Assert.assertTrue(letCarWorkPage.isElementPresentDOM("//*[text()=' Make is required ']", 5));
+    }
+    @Test
+    public void addNewCarNegativeTest_WOYear() {
+        CarDto car = CarDto.builder()
+
+                .serialNumber(new Random().nextInt(1000)+"-055")
+                .city("Haifa")
+                .manufacture("Mazda")
+                .model("CX-90")
+                .year("")
+                .fuel(Fuel.DIESEL.getLocator())
+                .seats(4)
+                .carClass("A")
+                .pricePerDay(123.99)
+                .about("About my car")
+                .build();
+        new LetCarWorkPage(getDriver()).typeLetCarWorkForm(car);
+        letCarWorkPage = new LetCarWorkPage(getDriver());
+        letCarWorkPage.typeLetCarWorkForm(car);
+        Assert.assertTrue(letCarWorkPage.isElementPresentDOM("//*[contains(text(), ' Year required ')]", 5));
     }
 }
 
