@@ -4,13 +4,15 @@ import dto.UserDtoLombok;
 import manager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.RegistrationPage;
 import pages.SearchPage;
+import utils.TestNGListener;
 
 import java.util.NoSuchElementException;
 import java.util.Random;
-
+@Listeners(TestNGListener.class)
 public class RegistrationTestsLombok extends ApplicationManager {
     RegistrationPage registrationPage;
     @Test

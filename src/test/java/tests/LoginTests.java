@@ -3,9 +3,12 @@ package tests;
 import manager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.SearchPage;
 import pages.LoginPage;
+import utils.TestNGListener;
+
 
 public class LoginTests extends ApplicationManager {
     @Test

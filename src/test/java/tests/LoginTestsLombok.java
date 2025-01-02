@@ -5,13 +5,15 @@ import manager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LoginPageLombok;
 import pages.SearchPage;
+import utils.TestNGListener;
 
 import java.util.NoSuchElementException;
 
-
+@Listeners(TestNGListener.class)
 public class LoginTestsLombok extends ApplicationManager {
 
     @BeforeMethod

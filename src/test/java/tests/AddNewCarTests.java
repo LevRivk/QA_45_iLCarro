@@ -1,18 +1,24 @@
 package tests;
 
+import data_providers.CarDP;
 import dto.CarDto;
 import dto.UserDtoLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LetCarWorkPage;
 import pages.LoginPageLombok;
 import pages.SearchPage;
 import utils.Fuel;
 import utils.RetryAnalyzer;
+import utils.TestNGListener;
 
+import java.lang.reflect.Method;
 import java.util.Random;
+
+@Listeners(TestNGListener.class)
 
 public class AddNewCarTests extends ApplicationManager {
     LoginPageLombok loginPageLombok;
@@ -120,6 +126,16 @@ public class AddNewCarTests extends ApplicationManager {
         letCarWorkPage = new LetCarWorkPage(getDriver());
         letCarWorkPage.typeLetCarWorkForm(car);
         Assert.assertTrue(letCarWorkPage.isElementPresentDOM("//*[contains(text(), ' Year required ')]", 5));
+    }
+    @Test(dataProvider = "dataProviderCarFile",dataProviderClass = CarDP.class)
+    public void addNewCarPositiveTestDP(CarDto car, Method method) {
+       logger.info(method.getName()+"Start with data -->" + car.toString());
+        letCarWorkPage = new LetCarWorkPage(getDriver());
+        letCarWorkPage.typeLetCarWorkForm(car);
+        Assert.assertTrue(letCarWorkPage
+                .isPopUpMessagePresent(car.getManufacture() + " " + car.getModel() + " " + "added successful"));
+        getDriver().quit();
+
     }
 }
 
