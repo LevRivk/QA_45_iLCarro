@@ -23,7 +23,7 @@ public class LoginPage extends BasePage{
         WebElement loginInputEmail;
         @FindBy(xpath = "//label[@for='password']")
         WebElement loginInputPassword;
-        @FindBy(xpath = "//[@id='password']")
+        @FindBy(xpath = "//input[@id='password']")
         WebElement loginInputPassword_2;
         @FindBy(xpath = "//button[text()='Y’alla!']")
         WebElement btnLogin_Yalla_;

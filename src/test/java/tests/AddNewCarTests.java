@@ -4,6 +4,7 @@ import data_providers.CarDP;
 import dto.CarDto;
 import dto.UserDtoLombok;
 import manager.ApplicationManager;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -13,10 +14,14 @@ import pages.LoginPageLombok;
 import pages.SearchPage;
 import utils.Fuel;
 import utils.RetryAnalyzer;
+import utils.TakeScreenShot;
 import utils.TestNGListener;
 
 import java.lang.reflect.Method;
 import java.util.Random;
+import static utils.PropertiesReader.*;
+import static utils.TakeScreenShot.*;
+
 
 @Listeners(TestNGListener.class)
 
@@ -30,6 +35,8 @@ public class AddNewCarTests extends ApplicationManager {
                 .email("shendonlevka@gmail.com")
                 .password("Lost4815!")
                 .build();
+
+
         new SearchPage(getDriver()).clickBtnLoginHeader();
         loginPageLombok = new LoginPageLombok(getDriver());
         loginPageLombok.typeLoginFormLombok(user);
@@ -61,6 +68,7 @@ public class AddNewCarTests extends ApplicationManager {
        // new letCarWorkPage(getDriver()).typeLetCarWorkForm(car);
         letCarWorkPage = new LetCarWorkPage(getDriver());
         letCarWorkPage.typeLetCarWorkForm(car);
+        takeScreenShot((TakesScreenshot) getDriver());
        Assert.assertTrue(letCarWorkPage
                 .isPopUpMessagePresent(car.getManufacture() + " " + car.getModel() + " " + "added successful"));
         getDriver().quit();

@@ -8,12 +8,18 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import static utils.PropertiesReader.*;
 
 public class SearchPage extends BasePage {
     //  тут мы делаем Конструктор Объекта HomePage
     public SearchPage(WebDriver driver) {
         setDriver(driver);
-        driver.get("https://ilcarro.web.app/search");
+
+      //  driver.get("https://ilcarro.web.app/search");
+        driver.get(getProperty("login.properties","urlStart"));
+
+
+
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);// ожидаем 10 сек появления Элемента на странице
     }
 

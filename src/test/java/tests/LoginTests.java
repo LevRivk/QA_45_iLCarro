@@ -9,6 +9,7 @@ import pages.SearchPage;
 import pages.LoginPage;
 import utils.TestNGListener;
 
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends ApplicationManager {
     @Test
