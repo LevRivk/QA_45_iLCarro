@@ -13,8 +13,6 @@ import pages.LetCarWorkPage;
 import pages.LoginPageLombok;
 import pages.SearchPage;
 import utils.Fuel;
-import utils.RetryAnalyzer;
-import utils.TakeScreenShot;
 import utils.TestNGListener;
 
 import java.lang.reflect.Method;
@@ -31,9 +29,13 @@ public class AddNewCarTests extends ApplicationManager {
 
     @BeforeMethod
     public void login() {
+//        UserDtoLombok user = UserDtoLombok.builder()
+//                .email("shendonlevka@gmail.com")
+//                .password("Lost4815!")
+//                .build();
         UserDtoLombok user = UserDtoLombok.builder()
-                .email("shendonlevka@gmail.com")
-                .password("Lost4815!")
+              .username(getProperty("login.properties","email"))
+                .password(getProperty("login.properties","password"))
                 .build();
 
 
@@ -50,7 +52,6 @@ public class AddNewCarTests extends ApplicationManager {
     }
 
     @Test//(retryAnalyzer = RetryAnalyzer.class,invocationCount = 2)
-
     public void addNewCarPositiveTest() {
         CarDto car = CarDto.builder()
 
@@ -75,7 +76,7 @@ public class AddNewCarTests extends ApplicationManager {
 
     }
     //Lesson 14
-    @Test//(retryAnalyzer = RetryAnalyzer.class,invocationCount = 2)
+    @Test
     public void addNewCarNegativeTest_WOMake() {
         CarDto car = CarDto.builder()
 
@@ -138,6 +139,17 @@ public class AddNewCarTests extends ApplicationManager {
     @Test(dataProvider = "dataProviderCarFile",dataProviderClass = CarDP.class)
     public void addNewCarPositiveTestDP(CarDto car, Method method) {
        logger.info(method.getName()+"Start with data -->" + car.toString());
+        letCarWorkPage = new LetCarWorkPage(getDriver());
+        letCarWorkPage.typeLetCarWorkForm(car);
+        Assert.assertTrue(letCarWorkPage
+                .isPopUpMessagePresent(car.getManufacture() + " " + car.getModel() + " " + "added successful"));
+        getDriver().quit();
+
+    }
+
+    @Test(dataProvider = "dataProviderCarFileProperties",dataProviderClass = CarDP.class)
+    public void addNewCarPositiveTestDPProperties(CarDto car, Method method) {
+        logger.info(method.getName()+"Start with data -->" + car.toString());
         letCarWorkPage = new LetCarWorkPage(getDriver());
         letCarWorkPage.typeLetCarWorkForm(car);
         Assert.assertTrue(letCarWorkPage

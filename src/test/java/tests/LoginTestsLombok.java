@@ -2,7 +2,6 @@ package tests;
 
 import dto.UserDtoLombok;
 import manager.ApplicationManager;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -10,8 +9,6 @@ import org.testng.annotations.Test;
 import pages.LoginPageLombok;
 import pages.SearchPage;
 import utils.TestNGListener;
-
-import java.util.NoSuchElementException;
 
 @Listeners(TestNGListener.class)
 public class LoginTestsLombok extends ApplicationManager {
@@ -26,7 +23,7 @@ public class LoginTestsLombok extends ApplicationManager {
     @Test
     public void loginPositiveTestLombok(){
         UserDtoLombok user = UserDtoLombok.builder()
-                .email("shendonlevka@gmail.com")
+                .username("shendonlevka@gmail.com")
                 .password("Lost4815!")
                 .build();
         new SearchPage(getDriver()).clickBtnLoginHeader();
@@ -40,7 +37,7 @@ public class LoginTestsLombok extends ApplicationManager {
     @Test
     public void loginNegativeTestLombok_wrongEmail(){
         UserDtoLombok user = UserDtoLombok.builder()
-                .email("shendonlevkagmail.com")
+                .username("shendonlevkagmail.com")
                 .password("Lost4815!")
                 .build();
         new SearchPage(getDriver()).clickBtnLoginHeader();
@@ -54,7 +51,7 @@ public class LoginTestsLombok extends ApplicationManager {
     @Test
     public void loginNegativeTestLombok_emptyPassword(){
         UserDtoLombok user = UserDtoLombok.builder()
-                .email("shendonlevka@gmail.com")
+                .username("shendonlevka@gmail.com")
                 .password("")
                 .build();
         new SearchPage(getDriver()).clickBtnLoginHeader();

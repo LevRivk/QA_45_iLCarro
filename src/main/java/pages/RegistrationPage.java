@@ -81,9 +81,9 @@ public class RegistrationPage extends BasePage {
     }
 
     public void typeRegistrationFormlombok(UserDtoLombok user) {
-        inputName.sendKeys(user.getName());
+        inputName.sendKeys(user.getFirstName());
         inputLastName.sendKeys(user.getLastName());
-        inputEmail.sendKeys(user.getEmail());
+        inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
     }
 

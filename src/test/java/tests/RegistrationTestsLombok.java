@@ -2,7 +2,6 @@ package tests;
 
 import dto.UserDtoLombok;
 import manager.ApplicationManager;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -10,7 +9,6 @@ import pages.RegistrationPage;
 import pages.SearchPage;
 import utils.TestNGListener;
 
-import java.util.NoSuchElementException;
 import java.util.Random;
 @Listeners(TestNGListener.class)
 public class RegistrationTestsLombok extends ApplicationManager {
@@ -19,9 +17,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
     public void registrationPositiveTestLombok(){
         int i = new Random().nextInt(1000)+1000;
         UserDtoLombok user = UserDtoLombok.builder()
-                .name("Bob")
+                .firstName("Bob")
                 .lastName("Doe")
-                .email(i+"bob_mail@gmail.com")
+                .username(i+"bob_mail@gmail.com")
                 .password("Pass123!")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
@@ -37,9 +35,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
 @Test
     public void registrationNegativeTest_WrongName(){
         UserDtoLombok user  = UserDtoLombok.builder()
-                .name("")
+                .firstName("")
                 .lastName("Ivanov")
-                .email("ivanov@gmail.com")
+                .username("ivanov@gmail.com")
                 .password("Ivanov123!")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
@@ -52,9 +50,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
     @Test
     public void registrationNegativeTest_WrongLastName(){
         UserDtoLombok user  = UserDtoLombok.builder()
-                .name("Vanya")
+                .firstName("Vanya")
                 .lastName("")
-                .email("ivanov@gmail.com")
+                .username("ivanov@gmail.com")
                 .password("Ivanov123!")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
@@ -69,9 +67,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
     @Test
     public void registrationNegativeTest_WrongEmail(){
         UserDtoLombok user  = UserDtoLombok.builder()
-                .name("Vanya")
+                .firstName("Vanya")
                 .lastName("Ivanov")
-                .email("")
+                .username("")
                 .password("Ivanov123!")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
@@ -85,9 +83,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
     @Test
     public void registrationNegativeTest_WrongPassword(){
         UserDtoLombok user  = UserDtoLombok.builder()
-                .name("Vanya")
+                .firstName("Vanya")
                 .lastName("Ivanov")
-                .email("ivanov@gmail.com")
+                .username("ivanov@gmail.com")
                 .password("")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
@@ -101,9 +99,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
     @Test
     public void registrationNegativeTest_Unchecked_Checkbox(){
         UserDtoLombok user  = UserDtoLombok.builder()
-                .name("Vanya")
+                .firstName("Vanya")
                 .lastName("Ivanov")
-                .email("ivanov@gmail.com")
+                .username("ivanov@gmail.com")
                 .password("Ivan123!")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
@@ -116,9 +114,9 @@ public class RegistrationTestsLombok extends ApplicationManager {
     @Test
     public void registrationNegativeTest_WO_Checkbox(){
         UserDtoLombok user  = UserDtoLombok.builder()
-                .name("Vanya")
+                .firstName("Vanya")
                 .lastName("Ivanov")
-                .email("ivanov@gmail.com")
+                .username("ivanov@gmail.com")
                 .password("Ivan123!")
                 .build();
         new SearchPage(getDriver()).clickBtnSignUp();
